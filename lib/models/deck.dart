@@ -1,8 +1,9 @@
 import '../util/constants.dart';
 import '../services/mapper.dart';
+import './card.dart';
 
 class Deck {
-  var cards;
+  var cards = <Card>[];
 
   Deck() {
     var mapper = Mapper();
@@ -11,5 +12,9 @@ class Deck {
       var card = mapper.mapInt(id);
       cards.add(card);
     });
+  }
+
+  void shuffle() {
+    cards.shuffle();
   }
 }

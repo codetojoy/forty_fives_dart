@@ -98,4 +98,11 @@ class Card {
 
     return result;
   }
+
+  @override
+  String toString() {
+    var ordStr = _buildOrdinalString();
+    var suitStr = _buildSuitString();
+    return '$ordStr$suitStr';
+  }
 }
