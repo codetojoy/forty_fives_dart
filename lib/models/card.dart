@@ -25,8 +25,8 @@ enum Suit {
 
 class Card {
   int id = 0;
-  Suit _suit = Suit.SPADES;
-  Ordinal _ordinal = Ordinal.ACE;
+  Suit suit = Suit.SPADES;
+  Ordinal ordinal = Ordinal.ACE;
 
   Card(Ordinal ordinal, Suit suit, [int id = 0]) {
     if (id == 0) {
@@ -34,8 +34,8 @@ class Card {
     } else {
       this.id = id;
     }
-    _suit = suit;
-    _ordinal = ordinal;
+    this.suit = suit;
+    this.ordinal = ordinal;
   }
 
   String get imageURL {
@@ -48,7 +48,7 @@ class Card {
 
   String _buildOrdinalString() {
     var result = '';
-    var resultOrd = _ordinal.index + 1;
+    var resultOrd = ordinal.index + 1;
 
     if (resultOrd < C.SUIT_MIN_INDEX + 1 || resultOrd > C.SUIT_MAX_INDEX + 1) {
       // throw new TypeError("illegal value");
@@ -78,7 +78,7 @@ class Card {
   String _buildSuitString() {
     var result = '';
 
-    switch (_suit) {
+    switch (suit) {
       case Suit.CLUBS:
         result = 'C';
         break;
