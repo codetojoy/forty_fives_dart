@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import '../services/game.dart';
-
-class GameLoop {
-  void loop() {
+class Game {
+  void play() {
     var done = false;
 
     while (!done) {
@@ -12,13 +10,6 @@ class GameLoop {
       stdout.writeln('your choice: ');
       final input = stdin.readLineSync();
       stdout.writeln('You typed: $input');
-      final upperInput = input!.toUpperCase();
-      if (upperInput == 'N') {
-        Game().play();
-      } else if (upperInput == 'Q') {
-        done = true;
-      }
     }
-    stdout.writeln('bye...');
   }
 }
