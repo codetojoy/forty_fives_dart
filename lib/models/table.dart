@@ -6,7 +6,7 @@ import '../services/auditor.dart';
 class Table {
   List<Player> players;
   Deck deck;
-  // Card _topCard = null;
+  Card? topCard;
   // int _roundNum = 0;
 
   Table(this.players, this.deck);
@@ -18,6 +18,9 @@ class Table {
   @override
   String toString() {
     var result = '';
+    if (topCard != null) {
+      result += 'top: $topCard\n';
+    }
     players.forEach((player) {
       result += '$player\n';
     });

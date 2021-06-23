@@ -14,6 +14,9 @@ class Game {
     var dealer = Dealer();
     dealer.dealHands(table, deck);
     table.audit();
+    final topCard = deck.take(1)[0];
+    table.topCard = topCard;
+    table.audit();
     print('$table');
   }
 /*
