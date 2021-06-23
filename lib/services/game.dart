@@ -9,7 +9,8 @@ class Game {
     var done = false;
     var deck = Deck();
     deck.shuffle();
-    var table = Config.instance.getTable();
+    var table = Config.instance.getTable(deck);
+    table.audit();
     var dealer = Dealer();
     dealer.dealHands(table, deck);
     print('$table');

@@ -7,6 +7,10 @@ class Player {
 
   Player(this._name, this._hand, this._interactive);
 
+  void dealHand(Hand hand) {
+    _hand = hand;
+  }
+
   @override
   String toString() {
     return '$_name $_hand';

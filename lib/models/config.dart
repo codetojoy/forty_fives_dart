@@ -1,3 +1,4 @@
+import './deck.dart';
 import './player.dart';
 import './hand.dart';
 import './table.dart';
@@ -20,8 +21,8 @@ class Config {
 
   static Config instance = Config._();
 
-  Table getTable() {
-    var table = Table(_players);
+  Table getTable(Deck deck) {
+    var table = Table(_players, deck);
     return table;
   }
 }
