@@ -1,13 +1,17 @@
 import './deck.dart';
 import './player.dart';
 import './card.dart';
+import './trick.dart';
 import '../services/auditor.dart';
 
 class Table {
   List<Player> players;
   Deck deck;
   Card? topCard;
-  // int _roundNum = 0;
+  List<Trick> tricks = [];
+  Suit? trumpSuit;
+  Card? leadingCard;
+  int roundNum = 0;
 
   Table(this.players, this.deck);
 

@@ -5,6 +5,9 @@ import '../utils/constants.dart';
 import '../utils/logger.dart';
 
 class Auditor {
+  static const expected =
+      (Const.NUM_CARDS_IN_DECK * (Const.NUM_CARDS_IN_DECK + 1)) / 2;
+
   int _value(Card card) {
     return card.id + 1;
   }
@@ -22,9 +25,6 @@ class Auditor {
   }
 
   bool audit(Table table) {
-    final numCards = Const.NUM_CARDS_IN_DECK;
-    final expected = (numCards * (numCards + 1)) / 2;
-
     var actual = 0;
     actual += _sumCards(table.deck.cards);
     actual += _sumPlayers(table.players);

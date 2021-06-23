@@ -15,4 +15,8 @@ class Dealer {
     final hand = Hand.provide(cards);
     player.dealHand(hand);
   }
+
+  void playRound(Table table) {
+    print('TODO: play round');
+  }
 }

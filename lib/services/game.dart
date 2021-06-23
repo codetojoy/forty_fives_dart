@@ -2,35 +2,34 @@ import 'dart:io';
 
 import '../models/config.dart';
 import '../models/deck.dart';
+import '../models/table.dart';
 import '../services/dealer.dart';
+import '../services/dealer.dart';
+import '../utils/constants.dart';
 
 class Game {
-  void play() {
-    var done = false;
+  final _dealer = Dealer();
+
+  Table setUp() {
     var deck = Deck();
     deck.shuffle();
     var table = Config.instance.getTable(deck);
     table.audit();
-    var dealer = Dealer();
-    dealer.dealHands(table, deck);
+    _dealer.dealHands(table, deck);
     table.audit();
     final topCard = deck.take(1)[0];
     table.topCard = topCard;
     table.audit();
-    print('$table');
+    return table;
   }
-/*
-    deck.cards.forEach((card) {
-      print('$card');
-    });
-  }
-    while (!done) {
-      stdout.writeln('N - new game');
-      stdout.writeln('Q - quit');
-      stdout.writeln('your choice: ');
-      final input = stdin.readLineSync();
-      stdout.writeln('You typed: $input');
+
+  void play() {
+    var table = setUp();
+    var roundCount = 1;
+    while (roundCount <= Const.NUM_CARDS_IN_HAND) {
+      _dealer.playRound(table);
+      print('$table');
+      roundCount++;
     }
   }
-  */
 }
