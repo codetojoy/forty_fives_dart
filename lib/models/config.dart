@@ -1,12 +1,27 @@
 import './player.dart';
 import './hand.dart';
+import './table.dart';
 
 class Config {
+  final _players = <Player>[];
+
   List<Player> getPlayers() {
-    var players = <Player>[];
-    players.add(Player('User', Hand(), true));
-    players.add(Player('Mozart', Hand(), false));
-    players.add(Player('Chopin', Hand(), false));
-    return players;
+    return _players;
+  }
+
+  Config._() {
+    var p1 = Player('You', Hand(), true);
+    var p2 = Player('Mozart', Hand(), false);
+    var p3 = Player('Chopin', Hand(), false);
+    _players.add(p1);
+    _players.add(p2);
+    _players.add(p3);
+  }
+
+  static Config instance = Config._();
+
+  Table getTable() {
+    var table = Table(_players);
+    return table;
   }
 }

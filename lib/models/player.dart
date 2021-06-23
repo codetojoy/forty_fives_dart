@@ -6,4 +6,9 @@ class Player {
   bool _interactive;
 
   Player(this._name, this._hand, this._interactive);
+
+  @override
+  String toString() {
+    return '$_name $_hand';
+  }
 }

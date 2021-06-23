@@ -30,7 +30,7 @@ class Card {
 
   Card(Ordinal ordinal, Suit suit, [int id = 0]) {
     if (id == 0) {
-      this.id = ordinal.index + suit.index * C.NUM_CARDS_IN_SUIT;
+      this.id = ordinal.index + suit.index * Const.NUM_CARDS_IN_SUIT;
     } else {
       this.id = id;
     }
@@ -50,7 +50,8 @@ class Card {
     var result = '';
     var resultOrd = ordinal.index + 1;
 
-    if (resultOrd < C.SUIT_MIN_INDEX + 1 || resultOrd > C.SUIT_MAX_INDEX + 1) {
+    if (resultOrd < Const.SUIT_MIN_INDEX + 1 ||
+        resultOrd > Const.SUIT_MAX_INDEX + 1) {
       // throw new TypeError("illegal value");
     }
 

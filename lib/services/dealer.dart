@@ -3,8 +3,7 @@ import '../models/table.dart';
 
 class Dealer {
   Table newGame() {
-    var players = Config().getPlayers();
-    var table = Table(players);
+    var table = Config.instance.getTable();
     return table;
   }
 }

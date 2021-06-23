@@ -14,4 +14,13 @@ class Hand {
   void dealCard(Card card) {
     _cards.add(card);
   }
+
+  @override
+  String toString() {
+    var result = '';
+    _cards.forEach((card) {
+      result += ' $card';
+    });
+    return result;
+  }
 }

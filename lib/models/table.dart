@@ -7,4 +7,13 @@ class Table {
   // int _roundNum = 0;
 
   Table(this._players);
+
+  @override
+  String toString() {
+    var result = '';
+    _players.forEach((player) {
+      result += '$player\n';
+    });
+    return result;
+  }
 }

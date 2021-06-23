@@ -4,7 +4,7 @@ import '../util/constants.dart';
 class Mapper {
   Ordinal mapOrdinal(var index) {
     // guard
-    if (index < C.SUIT_MIN_INDEX || index > C.SUIT_MAX_INDEX) {
+    if (index < Const.SUIT_MIN_INDEX || index > Const.SUIT_MAX_INDEX) {
       throw Exception('illegal value for index: $index');
     }
 
@@ -15,13 +15,13 @@ class Mapper {
 
   Card mapInt(var n) {
     // guard
-    if (n < C.DECK_MIN_INDEX || n > C.DECK_MAX_INDEX) {
+    if (n < Const.DECK_MIN_INDEX || n > Const.DECK_MAX_INDEX) {
       throw Exception('illegal value for n: $n');
     }
 
-    final remainder = n % C.NUM_CARDS_IN_SUIT;
+    final remainder = n % Const.NUM_CARDS_IN_SUIT;
     final ordinal = mapOrdinal(remainder);
-    final index = (n / C.NUM_CARDS_IN_SUIT).floor();
+    final index = (n / Const.NUM_CARDS_IN_SUIT).floor();
     final suit = Suit.values[index];
 
     final result = Card(ordinal, suit, n);

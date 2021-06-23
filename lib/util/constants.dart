@@ -1,4 +1,4 @@
-class C {
+class Const {
   static final NUM_CARDS_IN_SUIT = 13;
   static final NUM_CARDS_IN_DECK = 52;
   static final NUM_CARDS_IN_HAND = 5;
