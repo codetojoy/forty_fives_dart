@@ -7,7 +7,7 @@ class Deck {
 
   Deck() {
     var mapper = Mapper();
-    var ids = List<int>.generate(Const.DECK_MAX_INDEX, (i) => i);
+    var ids = List<int>.generate(Const.NUM_CARDS_IN_DECK, (i) => i);
     ids.forEach((id) {
       var card = mapper.mapInt(id);
       cards.add(card);
@@ -20,6 +20,7 @@ class Deck {
 
   List<Card> take(int n) {
     var result = cards.take(n).toList();
+    result.forEach((card) => cards.remove(card));
     return result;
   }
 }
