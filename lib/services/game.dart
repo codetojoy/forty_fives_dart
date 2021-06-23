@@ -13,6 +13,7 @@ class Game {
     table.audit();
     var dealer = Dealer();
     dealer.dealHands(table, deck);
+    table.audit();
     print('$table');
   }
 /*

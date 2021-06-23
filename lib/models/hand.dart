@@ -11,8 +11,9 @@ class Hand {
 
   get cards => _cards;
 
-  void dealCard(Card card) {
+  Hand dealCard(Card card) {
     _cards.add(card);
+    return this;
   }
 
   @override
