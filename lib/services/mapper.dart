@@ -1,5 +1,5 @@
 import '../models/card.dart';
-import '../util/constants.dart';
+import '../utils/constants.dart';
 
 class Mapper {
   Ordinal mapOrdinal(var index) {

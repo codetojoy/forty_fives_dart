@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:forty_fives_dart/models/card.dart';
-import 'package:forty_fives_dart/util/constants.dart';
+import 'package:forty_fives_dart/utils/constants.dart';
 
 void main() {
   final numCards = 3;

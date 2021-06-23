@@ -1,4 +1,4 @@
-import '../util/constants.dart';
+import '../utils/constants.dart';
 import '../services/mapper.dart';
 import './card.dart';
 
@@ -16,5 +16,10 @@ class Deck {
 
   void shuffle() {
     cards.shuffle();
+  }
+
+  List<Card> take(int n) {
+    var result = cards.take(n).toList();
+    return result;
   }
 }

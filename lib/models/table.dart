@@ -2,16 +2,16 @@ import './player.dart';
 import './card.dart';
 
 class Table {
-  List<Player> _players;
+  List<Player> players;
   // Card _topCard = null;
   // int _roundNum = 0;
 
-  Table(this._players);
+  Table(this.players);
 
   @override
   String toString() {
     var result = '';
-    _players.forEach((player) {
+    players.forEach((player) {
       result += '$player\n';
     });
     return result;

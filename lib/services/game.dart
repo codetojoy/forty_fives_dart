@@ -2,6 +2,7 @@ import 'dart:io';
 
 import '../models/config.dart';
 import '../models/deck.dart';
+import '../services/dealer.dart';
 
 class Game {
   void play() {
@@ -9,6 +10,8 @@ class Game {
     var deck = Deck();
     deck.shuffle();
     var table = Config.instance.getTable();
+    var dealer = Dealer();
+    dealer.dealHands(table, deck);
     print('$table');
   }
 /*
