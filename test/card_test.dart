@@ -10,6 +10,7 @@ void main() {
     test('canary', () {
       expect(4, 2 + 2);
     });
+    /*
     test('imageURL basic', () {
       var card = Card(Ordinal.QUEEN, Suit.HEARTS);
 
@@ -18,5 +19,6 @@ void main() {
 
       expect('assets/images/cards/QH.jpg', result);
     });
+    */
   });
 }

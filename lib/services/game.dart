@@ -24,12 +24,17 @@ class Game {
   }
 
   void play() {
-    var table = setUp();
+    final table = setUp();
+    print('setup\n $table');
     var roundCount = 1;
-    while (roundCount <= Const.NUM_CARDS_IN_HAND) {
+    final numRounds = Const.NUM_CARDS_IN_HAND;
+    while (roundCount <= numRounds) {
       _dealer.playRound(table);
-      print('$table');
+      table.audit();
+      print('round $roundCount\n$table');
       roundCount++;
     }
+    print('end\n $table');
+    table.audit();
   }
 }

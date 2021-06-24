@@ -1,8 +1,10 @@
+import '../models/bid.dart';
 import '../models/config.dart';
 import '../models/deck.dart';
 import '../models/hand.dart';
 import '../models/table.dart';
 import '../models/player.dart';
+import '../models/trick.dart';
 import '../utils/constants.dart';
 
 class Dealer {
@@ -17,6 +19,14 @@ class Dealer {
   }
 
   void playRound(Table table) {
+    final trick = Trick(table.trumpSuit);
+    var bids = <Bid>[];
+    table.players.forEach((player) {
+      var bid = player.getBid(trick);
+      bids.add(bid);
+      table.discard(bid.card);
+    });
+    table.tricks.add(trick);
     print('TODO: play round');
   }
 }

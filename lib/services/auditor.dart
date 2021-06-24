@@ -9,7 +9,7 @@ class Auditor {
       (Const.NUM_CARDS_IN_DECK * (Const.NUM_CARDS_IN_DECK + 1)) / 2;
 
   int _value(Card card) {
-    return card.id + 1;
+    return (card.isUnknown) ? 0 : card.id + 1;
   }
 
   int _sumCards(List<Card> cards) {
@@ -28,9 +28,8 @@ class Auditor {
     var actual = 0;
     actual += _sumCards(table.deck.cards);
     actual += _sumPlayers(table.players);
-    if (table.topCard != null) {
-      actual += _value(table.topCard!);
-    }
+    actual += _sumCards(table.discardedCards);
+    actual += _value(table.topCard);
 
     final result = (expected == actual);
     if (!result) {

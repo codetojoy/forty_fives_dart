@@ -1,5 +1,9 @@
 import '../utils/constants.dart';
 
+class CardException implements Exception {
+  String errMsg() => 'illegal card id';
+}
+
 enum Ordinal {
   ACE, //  = 0,
   TWO, //  = 1,
@@ -28,6 +32,12 @@ class Card {
   Suit suit = Suit.SPADES;
   Ordinal ordinal = Ordinal.ACE;
 
+  Card.unknown() {
+    id = Const.UNKNOWN_CARD_ID;
+  }
+
+  bool get isUnknown => (id == Const.UNKNOWN_CARD_ID);
+
   Card(Ordinal ordinal, Suit suit, [int id = 0]) {
     if (id == 0) {
       this.id = ordinal.index + suit.index * Const.NUM_CARDS_IN_SUIT;
@@ -38,6 +48,7 @@ class Card {
     this.ordinal = ordinal;
   }
 
+/*
   String get imageURL {
     var ordStr = _buildOrdinalString();
     var suitStr = _buildSuitString();
@@ -45,6 +56,7 @@ class Card {
     var result = 'assets/images/cards/${ordStr}${suitStr}.jpg';
     return result;
   }
+*/
 
   String _buildOrdinalString() {
     var result = '';
@@ -52,7 +64,7 @@ class Card {
 
     if (resultOrd < Const.SUIT_MIN_INDEX + 1 ||
         resultOrd > Const.SUIT_MAX_INDEX + 1) {
-      // throw new TypeError("illegal value");
+      throw CardException();
     }
 
     switch (resultOrd) {

@@ -3,8 +3,8 @@ import 'package:forty_fives_dart/models/config.dart';
 import 'package:forty_fives_dart/models/deck.dart';
 import 'package:forty_fives_dart/models/hand.dart';
 import 'package:forty_fives_dart/models/table.dart';
+import 'package:forty_fives_dart/models/player.dart';
 import 'package:forty_fives_dart/services/auditor.dart';
-import 'package:forty_fives_dart/utils/constants.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
     setUp(() {
       auditor = Auditor();
     });
-    test('audit basic table', () {
+    test('audit: deck only', () {
       final deck = Deck();
       deck.shuffle();
       final table = Table([], deck);
@@ -23,7 +23,7 @@ void main() {
 
       expect(result, true);
     });
-    test('audit with players', () {
+    test('audit: deck, players', () {
       final deck = Deck();
       deck.shuffle();
       var players = Config.instance.getPlayers();
@@ -35,6 +35,31 @@ void main() {
       players[1].dealHand(Hand().dealCard(card2));
       var card3 = deck.take(1)[0];
       players[2].dealHand(Hand().dealCard(card3));
+
+      // test
+      var result = auditor.audit(table);
+
+      expect(result, true);
+    });
+    test('audit: deck, topCard', () {
+      final deck = Deck();
+      deck.shuffle();
+      var players = <Player>[];
+      final table = Table(players, deck);
+      table.topCard = deck.take(1)[0];
+
+      // test
+      var result = auditor.audit(table);
+
+      expect(result, true);
+    });
+    test('audit: deck, discards', () {
+      final deck = Deck();
+      deck.shuffle();
+      var players = <Player>[];
+      final table = Table(players, deck);
+      final discardedCards = deck.take(5);
+      table.discardedCards = discardedCards;
 
       // test
       var result = auditor.audit(table);

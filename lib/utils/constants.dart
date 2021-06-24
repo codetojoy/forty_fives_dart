@@ -24,4 +24,6 @@ class Const {
 
   static const String BLUE_BACK = "assets/images/cards/blue_back.jpg";
   static const String GREEN_BACK = "assets/images/cards/Green_back.jpg";
+
+  static const int UNKNOWN_CARD_ID = -99;
 }

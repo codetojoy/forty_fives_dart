@@ -9,12 +9,12 @@ enum TrickState {
 }
 
 class Trick {
-  /*
-  Suit _trumpSuit;
-  Suit _leadingSuit;
-  bool _hasTrumpBeenPlayed;
-  Bid _winningBid;
-  int _pointValue;
-  List<Bid> bids;
-  */
+  Suit trumpSuit;
+  // Suit _leadingSuit;
+  // bool _hasTrumpBeenPlayed;
+  // Bid _winningBid;
+  // int _pointValue;
+  List<Bid> bids = [];
+
+  Trick(this.trumpSuit);
 }

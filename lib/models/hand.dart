@@ -11,6 +11,11 @@ class Hand {
 
   get cards => _cards;
 
+  Hand removeCard(Card card) {
+    _cards.remove(card);
+    return this;
+  }
+
   Hand dealCard(Card card) {
     _cards.add(card);
     return this;

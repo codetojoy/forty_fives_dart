@@ -7,11 +7,11 @@ import '../services/auditor.dart';
 class Table {
   List<Player> players;
   Deck deck;
-  Card? topCard;
+  Card topCard = Card.unknown();
   List<Trick> tricks = [];
-  Suit? trumpSuit;
-  Card? leadingCard;
+  Card leadingCard = Card.unknown();
   int roundNum = 0;
+  List<Card> discardedCards = <Card>[];
 
   Table(this.players, this.deck);
 
@@ -19,11 +19,19 @@ class Table {
     Auditor().audit(this);
   }
 
+  void discard(Card card) {
+    discardedCards.add(card);
+  }
+
+  Suit get trumpSuit {
+    return topCard.suit;
+  }
+
   @override
   String toString() {
     var result = '';
     if (topCard != null) {
-      result += 'top: $topCard\n';
+      result += 'top: $topCard trump: $trumpSuit\n';
     }
     players.forEach((player) {
       result += '$player\n';
