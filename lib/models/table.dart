@@ -23,6 +23,10 @@ class Table {
     discardedCards.add(card);
   }
 
+  Suit get leadingSuit {
+    return leadingCard.suit;
+  }
+
   Suit get trumpSuit {
     return topCard.suit;
   }

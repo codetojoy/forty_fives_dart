@@ -20,13 +20,24 @@ class Dealer {
 
   void playRound(Table table) {
     final trick = Trick(table.trumpSuit);
+    var bids = getBids(table, trick);
+    table.tricks.add(trick);
+    print('TODO: play round');
+  }
+
+  List<Bid> getBids(Table table, Trick trick) {
     var bids = <Bid>[];
     table.players.forEach((player) {
+      var leadingSuit =
+          (table.leadingCard.isUnknown) ? null : table.leadingSuit;
+      trick.leadingSuit = leadingSuit;
       var bid = player.getBid(trick);
+      if (table.leadingCard.isUnknown) {
+        table.leadingCard = bid.card;
+      }
       bids.add(bid);
       table.discard(bid.card);
     });
-    table.tricks.add(trick);
-    print('TODO: play round');
+    return bids;
   }
 }

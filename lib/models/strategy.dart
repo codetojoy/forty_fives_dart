@@ -1,9 +1,14 @@
 import './card.dart';
 import './hand.dart';
 import './trick.dart';
+import '../utils/logger.dart';
 
 abstract class Strategy {
   Card selectCard(Hand hand, Trick trick);
+
+  void logInfo(Trick trick) {
+    L.log('strategy $trick');
+  }
 }
 
 enum StrategyType {
@@ -33,7 +38,10 @@ class Strategies {
 class _NextCard extends Strategy {
   @override
   Card selectCard(Hand hand, Trick trick) {
-    return hand.cards[0];
+    logInfo(trick);
+    final result = hand.cards[0];
+    L.log('next-card played: $result');
+    return result;
   }
 }
 

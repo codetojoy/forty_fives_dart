@@ -10,11 +10,17 @@ enum TrickState {
 
 class Trick {
   Suit trumpSuit;
-  // Suit _leadingSuit;
+  Suit? leadingSuit;
   // bool _hasTrumpBeenPlayed;
   // Bid _winningBid;
   // int _pointValue;
   List<Bid> bids = [];
 
   Trick(this.trumpSuit);
+
+  @override
+  String toString() {
+    final leadingSuitStr = (leadingSuit == null) ? 'N/A' : leadingSuit.toString();
+    return 'trump: $trumpSuit leading: $leadingSuitStr # bids: ${bids.length}';
+  }
 }

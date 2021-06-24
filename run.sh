@@ -2,5 +2,5 @@
 
 set -e
 
-dart run
+dart run | tee out.log
 
