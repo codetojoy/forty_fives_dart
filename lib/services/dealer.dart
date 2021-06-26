@@ -28,9 +28,7 @@ class Dealer {
   List<Bid> getBids(Table table, Trick trick) {
     var bids = <Bid>[];
     table.players.forEach((player) {
-      var leadingSuit =
-          (table.leadingCard.isUnknown) ? null : table.leadingSuit;
-      trick.leadingSuit = leadingSuit;
+      trick.leadingSuit = table.leadingSuit;
       var bid = player.getBid(trick);
       if (table.leadingCard.isUnknown) {
         table.leadingCard = bid.card;

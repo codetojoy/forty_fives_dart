@@ -21,6 +21,10 @@ class Hand {
     return this;
   }
 
+  bool containsCardOfSuit(Suit suit) {
+    return _cards.where((card) => card.suit == suit).isNotEmpty;
+  }
+
   @override
   String toString() {
     var result = '';

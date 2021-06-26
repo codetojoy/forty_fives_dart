@@ -20,6 +20,10 @@ class Player {
     _hand = hand;
   }
 
+  bool handContainsCardOfSuit(Suit suit) {
+    return _hand.containsCardOfSuit(suit);
+  }
+
   Bid getBid(Trick trick) {
     final card = _strategy.selectCard(_hand, trick);
     final bid = Bid(card, this);

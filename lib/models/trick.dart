@@ -9,18 +9,19 @@ enum TrickState {
 }
 
 class Trick {
-  Suit trumpSuit;
-  Suit? leadingSuit;
+  Suit trumpSuit = Suit.UNKNOWN;
+  Suit leadingSuit = Suit.UNKNOWN;
+  TrickState trickState = TrickState.UNKNOWN;
   // bool _hasTrumpBeenPlayed;
   // Bid _winningBid;
   // int _pointValue;
   List<Bid> bids = [];
 
   Trick(this.trumpSuit);
+  Trick.multi(this.trumpSuit, this.leadingSuit, this.trickState);
 
   @override
   String toString() {
-    final leadingSuitStr = (leadingSuit == null) ? 'N/A' : leadingSuit.toString();
-    return 'trump: $trumpSuit leading: $leadingSuitStr # bids: ${bids.length}';
+    return 'trump: $trumpSuit leading: $leadingSuit # bids: ${bids.length}';
   }
 }

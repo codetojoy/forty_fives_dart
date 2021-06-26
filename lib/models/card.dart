@@ -1,7 +1,7 @@
 import '../utils/constants.dart';
 
 class CardException implements Exception {
-  String errMsg() => 'illegal card id';
+  String errMsg() => 'illegal card';
 }
 
 enum Ordinal {
@@ -18,6 +18,7 @@ enum Ordinal {
   JACK, //  = 10,
   QUEEN, //  = 11,
   KING, //  = 12,
+  UNKNOWN,
 }
 
 enum Suit {
@@ -25,18 +26,17 @@ enum Suit {
   DIAMONDS, //  = 1,
   HEARTS, //  = 2,
   SPADES, //  = 3,
+  UNKNOWN,
 }
 
 class Card {
   int id = 0;
-  Suit suit = Suit.SPADES;
-  Ordinal ordinal = Ordinal.ACE;
+  Suit suit = Suit.UNKNOWN;
+  Ordinal ordinal = Ordinal.UNKNOWN;
 
-  Card.unknown() {
-    id = Const.UNKNOWN_CARD_ID;
-  }
+  bool get isUnknown => suit == Suit.UNKNOWN || ordinal == Ordinal.UNKNOWN;
 
-  bool get isUnknown => (id == Const.UNKNOWN_CARD_ID);
+  Card.unknown() {}
 
   Card(Ordinal ordinal, Suit suit, [int id = 0]) {
     if (id == 0) {
@@ -60,6 +60,10 @@ class Card {
 
   String _buildOrdinalString() {
     var result = '';
+
+    if (ordinal == Ordinal.UNKNOWN) {
+      throw CardException();
+    }
     var resultOrd = ordinal.index + 1;
 
     if (resultOrd < Const.SUIT_MIN_INDEX + 1 ||
@@ -90,6 +94,10 @@ class Card {
 
   String _buildSuitString() {
     var result = '';
+
+    if (suit == Suit.UNKNOWN) {
+      throw CardException();
+    }
 
     switch (suit) {
       case Suit.CLUBS:

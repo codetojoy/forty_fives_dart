@@ -1,3 +1,4 @@
+import './bid.dart';
 import './card.dart';
 import './hand.dart';
 import './trick.dart';
