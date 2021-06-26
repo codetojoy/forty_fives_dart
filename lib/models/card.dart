@@ -48,6 +48,26 @@ class Card {
     this.ordinal = ordinal;
   }
 
+  bool get isRed {
+    return suit == Suit.DIAMONDS || suit == Suit.HEARTS;
+  }
+
+  bool get isBlack {
+    return suit == Suit.CLUBS || suit == Suit.SPADES;
+  }
+
+  bool get isAceOfHearts {
+    return ordinal == Ordinal.ACE && suit == Suit.HEARTS;
+  }
+
+  bool isTrump(Suit trump) {
+    return suit == trump || isAceOfHearts;
+  }
+
+  bool isLeadingSuit(Suit leadingSuit) {
+    return suit == leadingSuit;
+  }
+
 /*
   String get imageURL {
     var ordStr = _buildOrdinalString();
