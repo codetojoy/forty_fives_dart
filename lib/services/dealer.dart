@@ -6,6 +6,7 @@ import '../models/table.dart';
 import '../models/player.dart';
 import '../models/trick.dart';
 import '../utils/constants.dart';
+import './filter.dart';
 
 class Dealer {
   void dealHands(Table table, Deck deck) {
@@ -27,14 +28,25 @@ class Dealer {
 
   List<Bid> getBids(Table table, Trick trick) {
     var bids = <Bid>[];
+    var playerCount = 1;
     table.players.forEach((player) {
-      trick.leadingSuit = table.leadingSuit;
-      var bid = player.getBid(trick);
+      if (playerCount == 1) {
+        trick.leadingSuit = table.leadingSuit;
+      }
+      final filter = Filters().buildFilter(FilterType.proper);
+      final cards = player.cards;
+      final trumpSuit = trick.trumpSuit;
+      final leadingSuit = trick.leadingSuit;
+      final trumpPlayed = false;
+      final candidates =
+          filter.getCandidates(cards, trumpSuit, leadingSuit, trumpPlayed);
+      var bid = player.getBid(trick, candidates);
       if (table.leadingCard.isUnknown) {
         table.leadingCard = bid.card;
       }
       bids.add(bid);
       table.discard(bid.card);
+      playerCount++;
     });
     return bids;
   }

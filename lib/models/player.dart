@@ -24,8 +24,8 @@ class Player {
     return _hand.containsCardOfSuit(suit);
   }
 
-  Bid getBid(Trick trick) {
-    final card = _strategy.selectCard(_hand, trick);
+  Bid getBid(Trick trick, List<Card> candidates) {
+    final card = _strategy.selectCard(_hand, trick, candidates);
     final bid = Bid(card, this);
     _hand = _hand.removeCard(card);
     return bid;

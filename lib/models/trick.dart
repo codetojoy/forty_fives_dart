@@ -22,6 +22,11 @@ class Trick {
 
   @override
   String toString() {
-    return 'trump: $trumpSuit leading: $leadingSuit # bids: ${bids.length}';
+    var result = 'trump: $trumpSuit\n';
+    result += 'leading: $leadingSuit\n';
+    bids.forEach((bid) {
+      result += 'bid: $bid\n';
+    });
+    return result;
   }
 }

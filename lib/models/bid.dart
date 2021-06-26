@@ -6,4 +6,9 @@ class Bid {
   final Player player;
 
   const Bid(this.card, this.player);
+
+  @override
+  String toString() {
+    return '$player.name bids $card';
+  }
 }
