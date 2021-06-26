@@ -65,7 +65,7 @@ class _NextCard extends Strategy {
 class _Console extends Strategy {
   @override
   Card selectCard(Hand hand, Trick trick, List<Card> candidates) {
-    logInfo(trick);
+    // logInfo(trick);
     confirmCandidates(hand, candidates);
     var choice = Card.unknown();
     var done = false;
@@ -82,10 +82,12 @@ class _Console extends Strategy {
         exit(0);
       }
       final choiceIndex = int.parse(input);
-      final ok = choiceIndex >= 0 && choiceIndex < candidates.length;
+      final ok = choiceIndex >= 1 && choiceIndex <= candidates.length;
       if (ok) {
-        choice = candidates[choiceIndex];
+        choice = candidates[choiceIndex - 1];
         done = true;
+      } else {
+        print('illegal choice');
       }
     }
     return choice;
