@@ -51,18 +51,28 @@ class ProperFilter extends Filter {
     if (leadingSuit != Suit.UNKNOWN) {
       if (leadingSuit == trumpSuit) {
         if (containsSuit(cards, trumpSuit)) {
-          filter = (card) => card.suit == trumpSuit;
+          // trump was led, player has trump and so must play
+          // TODO: reneg rule
+          filter = (card) => card.isTrump(trumpSuit);
         } else {
           // no-op
+          // trump was led, but player doesn't have trump
         }
       } else {
         if (containsSuit(cards, trumpSuit) ||
             containsSuit(cards, leadingSuit)) {
-          filter = (card) => card.suit == trumpSuit || card.suit == leadingSuit;
+          filter = (card) => card.isTrump(trumpSuit) || card.isLeadingSuit(leadingSuit);
+          // e.g. trump CLUBS, leading HEARTS
+          // player can play trump or leading
         } else {
           // no-op
+          // e.g. trump CLUBS, leading HEARTS
+          // player doesn't have either so can play anything
         }
       }
+    } else {
+      // no-op
+      // this is the opening play
     }
 
     final result = cards.where((card) => filter(card)).toList();
