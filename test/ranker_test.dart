@@ -5,29 +5,29 @@ import 'package:forty_fives_dart/services/ranker.dart';
 
 void main() {
   group('Ranker', () {
-    List<Card> _buildCards(Suit trump) {
+    List<Card> _buildCards(Suit suit, bool isTrump) {
       final cards = [
-        Card(Ordinal.KING, trump),
-        Card(Ordinal.QUEEN, trump),
-        Card(Ordinal.JACK, trump),
-        Card(Ordinal.TEN, trump),
-        Card(Ordinal.NINE, trump),
-        Card(Ordinal.EIGHT, trump),
-        Card(Ordinal.SEVEN, trump),
-        Card(Ordinal.SIX, trump),
-        Card(Ordinal.FIVE, trump),
-        Card(Ordinal.FOUR, trump),
-        Card(Ordinal.THREE, trump),
-        Card(Ordinal.TWO, trump),
-        Card(Ordinal.ACE, trump),
-        if (trump != Suit.HEARTS) Card(Ordinal.ACE, Suit.HEARTS),
+        Card(Ordinal.KING, suit),
+        Card(Ordinal.QUEEN, suit),
+        Card(Ordinal.JACK, suit),
+        Card(Ordinal.TEN, suit),
+        Card(Ordinal.NINE, suit),
+        Card(Ordinal.EIGHT, suit),
+        Card(Ordinal.SEVEN, suit),
+        Card(Ordinal.SIX, suit),
+        Card(Ordinal.FIVE, suit),
+        Card(Ordinal.FOUR, suit),
+        Card(Ordinal.THREE, suit),
+        Card(Ordinal.TWO, suit),
+        Card(Ordinal.ACE, suit),
+        if (isTrump && suit != Suit.HEARTS) Card(Ordinal.ACE, Suit.HEARTS),
       ];
       return cards;
     }
 
     test('customSort diamonds', () {
       const trump = Suit.DIAMONDS;
-      final cards = _buildCards(trump);
+      final cards = _buildCards(trump, true);
       cards.shuffle();
 
       // test
@@ -56,7 +56,7 @@ void main() {
     });
     test('customSort hearts', () {
       const trump = Suit.HEARTS;
-      final cards = _buildCards(trump);
+      final cards = _buildCards(trump, true);
       cards.shuffle();
 
       // test
@@ -79,7 +79,7 @@ void main() {
     });
     test('customSort clubs', () {
       const trump = Suit.CLUBS;
-      final cards = _buildCards(trump);
+      final cards = _buildCards(trump, true);
       cards.shuffle();
 
       // test
@@ -108,7 +108,7 @@ void main() {
     });
     test('customSort spades', () {
       const trump = Suit.SPADES;
-      final cards = _buildCards(trump);
+      final cards = _buildCards(trump, true);
       cards.shuffle();
 
       // test
@@ -134,6 +134,43 @@ void main() {
 
       expect(cards[i++].ordinal, Ordinal.JACK);
       expect(cards[i++].ordinal, Ordinal.FIVE);
+    });
+    assertBlackNonTrump(List<Card> cards) {
+      var i = 0;
+      expect(cards[i++].ordinal, Ordinal.TEN);
+      expect(cards[i++].ordinal, Ordinal.NINE);
+      expect(cards[i++].ordinal, Ordinal.EIGHT);
+      expect(cards[i++].ordinal, Ordinal.SEVEN);
+      expect(cards[i++].ordinal, Ordinal.SIX);
+      expect(cards[i++].ordinal, Ordinal.FOUR);
+      expect(cards[i++].ordinal, Ordinal.THREE);
+      expect(cards[i++].ordinal, Ordinal.TWO);
+      expect(cards[i++].ordinal, Ordinal.QUEEN);
+      expect(cards[i++].ordinal, Ordinal.KING);
+      expect(cards[i++].ordinal, Ordinal.ACE);
+      expect(cards[i++].ordinal, Ordinal.JACK);
+      expect(cards[i++].ordinal, Ordinal.FIVE);
+    }
+
+    test('customSort clubs non-trump', () {
+      const suit = Suit.CLUBS;
+      final cards = _buildCards(suit, false);
+      cards.shuffle();
+
+      // test
+      Ranker(suit, Suit.UNKNOWN).customSortArray(cards);
+
+      assertBlackNonTrump(cards);
+    });
+    test('customSort spades non-trump', () {
+      const suit = Suit.SPADES;
+      final cards = _buildCards(suit, false);
+      cards.shuffle();
+
+      // test
+      Ranker(suit, Suit.UNKNOWN).customSortArray(cards);
+
+      assertBlackNonTrump(cards);
     });
   }); // group
 } // main

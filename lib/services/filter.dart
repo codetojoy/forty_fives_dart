@@ -61,7 +61,8 @@ class ProperFilter extends Filter {
       } else {
         if (containsSuit(cards, trumpSuit) ||
             containsSuit(cards, leadingSuit)) {
-          filter = (card) => card.isTrump(trumpSuit) || card.isLeadingSuit(leadingSuit);
+          filter = (card) =>
+              card.isTrump(trumpSuit) || card.isLeadingSuit(leadingSuit);
           // e.g. trump CLUBS, leading HEARTS
           // player can play trump or leading
         } else {
