@@ -8,14 +8,6 @@ class Deck {
 
   Deck() {
     cards = List<Card>.from(C.allCards);
-    /*
-    var mapper = Mapper();
-    var ids = List<int>.generate(Const.NUM_CARDS_IN_DECK, (i) => i);
-    ids.forEach((id) {
-      var card = mapper.mapInt(id);
-      cards.add(card);
-    });
-    */
   }
 
   void shuffle() {

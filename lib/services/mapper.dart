@@ -1,6 +1,7 @@
 import '../models/card.dart';
 import '../utils/constants.dart';
 
+@deprecated
 class Mapper {
   Ordinal mapOrdinal(var index) {
     // guard
