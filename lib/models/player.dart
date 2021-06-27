@@ -5,12 +5,24 @@ import './strategy.dart';
 import './trick.dart';
 
 class Player {
-  String _name;
-  Hand _hand;
-  bool _interactive;
-  Strategy _strategy;
+  late String name;
+  late Hand _hand;
+  late bool _interactive;
+  late Strategy _strategy;
 
-  Player(this._name, this._hand, this._interactive, this._strategy);
+  Player(String name, Hand hand, bool interactive, Strategy strategy) {
+    this.name = name;
+    _hand = hand;
+    _interactive = interactive;
+    _strategy = strategy;
+  }
+
+  Player.simple(String name) {
+    this.name = name;
+    _hand = Hand();
+    _interactive = false;
+    _strategy = Strategies().buildStrategy(StrategyType.next_card);
+  }
 
   List<Card> get cards {
     return _hand.cards;
@@ -33,6 +45,6 @@ class Player {
 
   @override
   String toString() {
-    return '$_name $_hand';
+    return '$name $_hand';
   }
 }

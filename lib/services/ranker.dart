@@ -10,7 +10,7 @@ class RankInfo {
   const RankInfo(this.ord, this.suit, this.rank);
 }
 
-abstract class BaseMap {
+abstract class _BaseMap {
   static const maxRankCeiling = 18;
   final Map<int, int> _map = {};
 
@@ -28,10 +28,10 @@ abstract class BaseMap {
   }
 }
 
-class OffsuitBlackMap extends BaseMap {
-  OffsuitBlackMap() {
+class _OffsuitBlackMap extends _BaseMap {
+  _OffsuitBlackMap() {
     // off-suit CLUBS
-    var cards = [
+    const cards1 = [
       RankInfo(Ordinal.TEN, Suit.CLUBS, 1),
       RankInfo(Ordinal.NINE, Suit.CLUBS, 2),
       RankInfo(Ordinal.EIGHT, Suit.CLUBS, 3),
@@ -46,10 +46,10 @@ class OffsuitBlackMap extends BaseMap {
       RankInfo(Ordinal.QUEEN, Suit.CLUBS, 12),
       RankInfo(Ordinal.KING, Suit.CLUBS, 13),
     ];
-    setCards(cards);
+    setCards(cards1);
 
     // off-suit SPADES
-    cards = [
+    const cards2 = [
       RankInfo(Ordinal.TEN, Suit.SPADES, 1),
       RankInfo(Ordinal.NINE, Suit.SPADES, 2),
       RankInfo(Ordinal.EIGHT, Suit.SPADES, 3),
@@ -64,14 +64,14 @@ class OffsuitBlackMap extends BaseMap {
       RankInfo(Ordinal.QUEEN, Suit.SPADES, 12),
       RankInfo(Ordinal.KING, Suit.SPADES, 13),
     ];
-    setCards(cards);
+    setCards(cards2);
   }
-} // OffsuitBlackMap
+} // _OffsuitBlackMap
 
-class OffsuitRedMap extends BaseMap {
-  OffsuitRedMap() {
+class _OffsuitRedMap extends _BaseMap {
+  _OffsuitRedMap() {
     // off-suit DIAMONDS
-    var cards = [
+    const cards1 = [
       RankInfo(Ordinal.ACE, Suit.DIAMONDS, 1),
       RankInfo(Ordinal.TWO, Suit.DIAMONDS, 2),
       RankInfo(Ordinal.THREE, Suit.DIAMONDS, 3),
@@ -86,10 +86,10 @@ class OffsuitRedMap extends BaseMap {
       RankInfo(Ordinal.QUEEN, Suit.DIAMONDS, 12),
       RankInfo(Ordinal.KING, Suit.DIAMONDS, 13),
     ];
-    setCards(cards);
+    setCards(cards1);
 
     // off-suit HEARTS
-    cards = [
+    const cards2 = [
       RankInfo(Ordinal.TWO, Suit.HEARTS, 2),
       RankInfo(Ordinal.THREE, Suit.HEARTS, 3),
       RankInfo(Ordinal.FOUR, Suit.HEARTS, 4),
@@ -103,15 +103,15 @@ class OffsuitRedMap extends BaseMap {
       RankInfo(Ordinal.QUEEN, Suit.HEARTS, 12),
       RankInfo(Ordinal.KING, Suit.HEARTS, 13),
     ];
-    setCards(cards);
+    setCards(cards2);
   }
 }
 
-class TrumpClubsMap extends BaseMap {
-  TrumpClubsMap() {
+class _TrumpClubsMap extends _BaseMap {
+  _TrumpClubsMap() {
     // trump CLUBS
     const suit = Suit.CLUBS;
-    var cards = [
+    const cards = [
       RankInfo(Ordinal.TEN, suit, 1),
       RankInfo(Ordinal.NINE, suit, 2),
       RankInfo(Ordinal.EIGHT, suit, 3),
@@ -134,11 +134,11 @@ class TrumpClubsMap extends BaseMap {
   }
 }
 
-class TrumpSpadesMap extends BaseMap {
-  TrumpSpadesMap() {
+class _TrumpSpadesMap extends _BaseMap {
+  _TrumpSpadesMap() {
     // trump SPADES
     const suit = Suit.SPADES;
-    var cards = [
+    const cards = [
       RankInfo(Ordinal.TEN, suit, 1),
       RankInfo(Ordinal.NINE, suit, 2),
       RankInfo(Ordinal.EIGHT, suit, 3),
@@ -162,11 +162,11 @@ class TrumpSpadesMap extends BaseMap {
   }
 }
 
-class TrumpDiamondsMap extends BaseMap {
-  TrumpDiamondsMap() {
+class _TrumpDiamondsMap extends _BaseMap {
+  _TrumpDiamondsMap() {
     // trump DIAMONDS
     const suit = Suit.DIAMONDS;
-    var cards = [
+    const cards = [
       RankInfo(Ordinal.TWO, suit, 2),
       RankInfo(Ordinal.THREE, suit, 3),
       RankInfo(Ordinal.FOUR, suit, 4),
@@ -189,11 +189,11 @@ class TrumpDiamondsMap extends BaseMap {
   }
 }
 
-class TrumpHeartsMap extends BaseMap {
-  TrumpHeartsMap() {
+class _TrumpHeartsMap extends _BaseMap {
+  _TrumpHeartsMap() {
     // trump HEARTS
     const suit = Suit.HEARTS;
-    var cards = [
+    const cards = [
       RankInfo(Ordinal.TWO, suit, 2),
       RankInfo(Ordinal.THREE, suit, 3),
       RankInfo(Ordinal.FOUR, suit, 4),
@@ -220,22 +220,19 @@ class Ranker {
   static const unknownValue = -1;
   static const trumpSuitFactor = 1000;
   static const leadingSuitFactor = 100;
-  Suit _trumpSuit = Suit.UNKNOWN;
-  Suit _leadingSuit = Suit.UNKNOWN;
+  var _trumpSuit = Suit.UNKNOWN;
+  var _leadingSuit = Suit.UNKNOWN;
 
-  BaseMap _offSuitBlack = new OffsuitBlackMap();
-  BaseMap _offSuitRed = new OffsuitRedMap();
+  final _offSuitBlack = _OffsuitBlackMap();
+  final _offSuitRed = _OffsuitRedMap();
 
-  BaseMap _trumpClubs = new TrumpClubsMap();
-  BaseMap _trumpSpades = new TrumpSpadesMap();
+  final _trumpClubs = _TrumpClubsMap();
+  final _trumpSpades = _TrumpSpadesMap();
 
-  BaseMap _trumpDiamonds = new TrumpDiamondsMap();
-  BaseMap _trumpHearts = new TrumpHeartsMap();
+  final _trumpDiamonds = _TrumpDiamondsMap();
+  final _trumpHearts = _TrumpHeartsMap();
 
-  Ranker(Suit trumpSuit, Suit leadingSuit) {
-    this._trumpSuit = trumpSuit;
-    this._leadingSuit = leadingSuit;
-  }
+  Ranker(this._trumpSuit, this._leadingSuit);
 
   int compare(int a, int b) {
     return a == b
@@ -246,7 +243,7 @@ class Ranker {
   }
 
   void customSortArray(List<Card> cards) {
-    cards.sort((a, b) => this.customSort(a, b));
+    cards.sort((a, b) => customSort(a, b));
   }
 
   void customSortBids(List<Bid> bids) {
@@ -255,7 +252,7 @@ class Ranker {
 
   int getValueFromId(Card card) {
     var value = unknownValue;
-    var id = card.id;
+    final id = card.id;
 
     if (card.isTrump(_trumpSuit)) {
       if (card.suit == Suit.CLUBS || card.isAceOfHearts) {
