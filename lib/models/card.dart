@@ -30,42 +30,36 @@ enum Suit {
 }
 
 class Card {
-  int id = 0;
-  Suit suit = Suit.UNKNOWN;
-  Ordinal ordinal = Ordinal.UNKNOWN;
+  final int _id;
+  final Suit _suit;
+  final Ordinal _ordinal;
 
-  bool get isUnknown => suit == Suit.UNKNOWN || ordinal == Ordinal.UNKNOWN;
+  bool get isUnknown => _suit == Suit.UNKNOWN || _ordinal == Ordinal.UNKNOWN;
 
-  Card.unknown() {}
+  int get id => _id;
+  Suit get suit => _suit;
+  Ordinal get ordinal => _ordinal;
 
-  Card(Ordinal ordinal, Suit suit, [int id = 0]) {
-    if (id == 0) {
-      this.id = ordinal.index + suit.index * Const.NUM_CARDS_IN_SUIT;
-    } else {
-      this.id = id;
-    }
-    this.suit = suit;
-    this.ordinal = ordinal;
-  }
+  const Card(this._ordinal, this._suit, this._id);
 
   bool get isRed {
-    return suit == Suit.DIAMONDS || suit == Suit.HEARTS;
+    return _suit == Suit.DIAMONDS || _suit == Suit.HEARTS;
   }
 
   bool get isBlack {
-    return suit == Suit.CLUBS || suit == Suit.SPADES;
+    return _suit == Suit.CLUBS || _suit == Suit.SPADES;
   }
 
   bool get isAceOfHearts {
-    return ordinal == Ordinal.ACE && suit == Suit.HEARTS;
+    return _ordinal == Ordinal.ACE && _suit == Suit.HEARTS;
   }
 
   bool isTrump(Suit trump) {
-    return suit == trump || isAceOfHearts;
+    return _suit == trump || isAceOfHearts;
   }
 
   bool isLeadingSuit(Suit leadingSuit) {
-    return suit == leadingSuit;
+    return _suit == leadingSuit;
   }
 
 /*
@@ -81,10 +75,10 @@ class Card {
   String _buildOrdinalString() {
     var result = '';
 
-    if (ordinal == Ordinal.UNKNOWN) {
+    if (_ordinal == Ordinal.UNKNOWN) {
       throw CardException();
     }
-    var resultOrd = ordinal.index + 1;
+    var resultOrd = _ordinal.index + 1;
 
     if (resultOrd < Const.SUIT_MIN_INDEX + 1 ||
         resultOrd > Const.SUIT_MAX_INDEX + 1) {
@@ -115,11 +109,11 @@ class Card {
   String _buildSuitString() {
     var result = '';
 
-    if (suit == Suit.UNKNOWN) {
+    if (_suit == Suit.UNKNOWN) {
       throw CardException();
     }
 
-    switch (suit) {
+    switch (_suit) {
       case Suit.CLUBS:
         result = 'C';
         break;

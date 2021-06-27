@@ -1,17 +1,21 @@
 import '../utils/constants.dart';
 import '../services/mapper.dart';
 import './card.dart';
+import './cards.dart';
 
 class Deck {
-  var cards = <Card>[];
+  late final cards;
 
   Deck() {
+    cards = List<Card>.from(C.allCards);
+    /*
     var mapper = Mapper();
     var ids = List<int>.generate(Const.NUM_CARDS_IN_DECK, (i) => i);
     ids.forEach((id) {
       var card = mapper.mapInt(id);
       cards.add(card);
     });
+    */
   }
 
   void shuffle() {

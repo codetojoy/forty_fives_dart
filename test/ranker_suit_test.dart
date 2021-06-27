@@ -1,27 +1,16 @@
 import 'package:test/test.dart';
 
 import 'package:forty_fives_dart/models/card.dart';
+import 'package:forty_fives_dart/models/cards.dart';
 import 'package:forty_fives_dart/services/ranker.dart';
 
 void main() {
   group('Ranker', () {
     List<Card> _buildCards(Suit suit, bool isTrump) {
-      final cards = [
-        Card(Ordinal.KING, suit),
-        Card(Ordinal.QUEEN, suit),
-        Card(Ordinal.JACK, suit),
-        Card(Ordinal.TEN, suit),
-        Card(Ordinal.NINE, suit),
-        Card(Ordinal.EIGHT, suit),
-        Card(Ordinal.SEVEN, suit),
-        Card(Ordinal.SIX, suit),
-        Card(Ordinal.FIVE, suit),
-        Card(Ordinal.FOUR, suit),
-        Card(Ordinal.THREE, suit),
-        Card(Ordinal.TWO, suit),
-        Card(Ordinal.ACE, suit),
-        if (isTrump && suit != Suit.HEARTS) Card(Ordinal.ACE, Suit.HEARTS),
-      ];
+      final cards = C.getBySuit(suit);
+      if (isTrump && suit != Suit.HEARTS) {
+        cards.add(C.$AH);
+      }
       return cards;
     }
 

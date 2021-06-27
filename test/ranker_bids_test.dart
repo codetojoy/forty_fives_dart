@@ -2,13 +2,13 @@ import 'package:test/test.dart';
 
 import 'package:forty_fives_dart/models/bid.dart';
 import 'package:forty_fives_dart/models/card.dart';
+import 'package:forty_fives_dart/models/cards.dart';
 import 'package:forty_fives_dart/models/player.dart';
 import 'package:forty_fives_dart/services/ranker.dart';
 
 void main() {
   group('Ranker', () {
-    Bid b(String name, Ordinal ord, Suit suit) {
-      final card = Card(ord, suit);
+    Bid b(String name, Card card) {
       final player = Player.simple(name);
       final bid = Bid(card, player);
       return bid;
@@ -18,10 +18,10 @@ void main() {
       final trumpSuit = Suit.CLUBS;
       final leadingSuit = Suit.DIAMONDS;
       final bids = [
-        b('mozart', Ordinal.KING, Suit.SPADES),
-        b('chopin', Ordinal.ACE, Suit.HEARTS),
-        b('beethoven', Ordinal.FIVE, Suit.CLUBS),
-        b('liszt', Ordinal.TWO, Suit.DIAMONDS),
+        b('mozart', C.$KS),
+        b('chopin', C.$AH),
+        b('beethoven', C.$5C),
+        b('liszt', C.$2D),
       ];
 
       bids.shuffle();

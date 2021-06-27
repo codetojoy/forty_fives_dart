@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import './bid.dart';
 import './card.dart';
+import './cards.dart';
 import './hand.dart';
 import './trick.dart';
 import '../utils/logger.dart';
@@ -67,7 +67,7 @@ class _Console extends Strategy {
   Card selectCard(Hand hand, Trick trick, List<Card> candidates) {
     // logInfo(trick);
     confirmCandidates(hand, candidates);
-    var choice = Card.unknown();
+    var choice = C.UNKNOWN;
     var done = false;
 
     while (!done) {

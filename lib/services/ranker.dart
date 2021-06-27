@@ -3,11 +3,10 @@ import '../models/card.dart';
 import '../models/cards.dart';
 
 class RankInfo {
-  final Ordinal ord;
-  final suit;
+  final card;
   final rank;
 
-  const RankInfo(this.ord, this.suit, this.rank);
+  const RankInfo(this.card, this.rank);
 }
 
 abstract class _BaseMap {
@@ -15,7 +14,7 @@ abstract class _BaseMap {
   final Map<int, int> _map = {};
 
   void setCard(RankInfo info) {
-    final id = Card(info.ord, info.suit).id;
+    final id = info.card.id;
     _map[id] = info.rank;
   }
 
@@ -32,37 +31,37 @@ class _OffsuitBlackMap extends _BaseMap {
   _OffsuitBlackMap() {
     // off-suit CLUBS
     const cards1 = [
-      RankInfo(Ordinal.TEN, Suit.CLUBS, 1),
-      RankInfo(Ordinal.NINE, Suit.CLUBS, 2),
-      RankInfo(Ordinal.EIGHT, Suit.CLUBS, 3),
-      RankInfo(Ordinal.SEVEN, Suit.CLUBS, 4),
-      RankInfo(Ordinal.SIX, Suit.CLUBS, 5),
-      RankInfo(Ordinal.FIVE, Suit.CLUBS, 6),
-      RankInfo(Ordinal.FOUR, Suit.CLUBS, 7),
-      RankInfo(Ordinal.THREE, Suit.CLUBS, 8),
-      RankInfo(Ordinal.TWO, Suit.CLUBS, 9),
-      RankInfo(Ordinal.ACE, Suit.CLUBS, 10),
-      RankInfo(Ordinal.JACK, Suit.CLUBS, 11),
-      RankInfo(Ordinal.QUEEN, Suit.CLUBS, 12),
-      RankInfo(Ordinal.KING, Suit.CLUBS, 13),
+      RankInfo(C.$10C, 1),
+      RankInfo(C.$9C, 2),
+      RankInfo(C.$8C, 3),
+      RankInfo(C.$7C, 4),
+      RankInfo(C.$6C, 5),
+      RankInfo(C.$5C, 6),
+      RankInfo(C.$4C, 7),
+      RankInfo(C.$3C, 8),
+      RankInfo(C.$2C, 9),
+      RankInfo(C.$AC, 10),
+      RankInfo(C.$JC, 11),
+      RankInfo(C.$QC, 12),
+      RankInfo(C.$KC, 13),
     ];
     setCards(cards1);
 
     // off-suit SPADES
     const cards2 = [
-      RankInfo(Ordinal.TEN, Suit.SPADES, 1),
-      RankInfo(Ordinal.NINE, Suit.SPADES, 2),
-      RankInfo(Ordinal.EIGHT, Suit.SPADES, 3),
-      RankInfo(Ordinal.SEVEN, Suit.SPADES, 4),
-      RankInfo(Ordinal.SIX, Suit.SPADES, 5),
-      RankInfo(Ordinal.FIVE, Suit.SPADES, 6),
-      RankInfo(Ordinal.FOUR, Suit.SPADES, 7),
-      RankInfo(Ordinal.THREE, Suit.SPADES, 8),
-      RankInfo(Ordinal.TWO, Suit.SPADES, 9),
-      RankInfo(Ordinal.ACE, Suit.SPADES, 10),
-      RankInfo(Ordinal.JACK, Suit.SPADES, 11),
-      RankInfo(Ordinal.QUEEN, Suit.SPADES, 12),
-      RankInfo(Ordinal.KING, Suit.SPADES, 13),
+      RankInfo(C.$10S, 1),
+      RankInfo(C.$9S, 2),
+      RankInfo(C.$8S, 3),
+      RankInfo(C.$7S, 4),
+      RankInfo(C.$6S, 5),
+      RankInfo(C.$5S, 6),
+      RankInfo(C.$4S, 7),
+      RankInfo(C.$3S, 8),
+      RankInfo(C.$2S, 9),
+      RankInfo(C.$AS, 10),
+      RankInfo(C.$JS, 11),
+      RankInfo(C.$QS, 12),
+      RankInfo(C.$KS, 13),
     ];
     setCards(cards2);
   }
@@ -72,36 +71,37 @@ class _OffsuitRedMap extends _BaseMap {
   _OffsuitRedMap() {
     // off-suit DIAMONDS
     const cards1 = [
-      RankInfo(Ordinal.ACE, Suit.DIAMONDS, 1),
-      RankInfo(Ordinal.TWO, Suit.DIAMONDS, 2),
-      RankInfo(Ordinal.THREE, Suit.DIAMONDS, 3),
-      RankInfo(Ordinal.FOUR, Suit.DIAMONDS, 4),
-      RankInfo(Ordinal.FIVE, Suit.DIAMONDS, 5),
-      RankInfo(Ordinal.SIX, Suit.DIAMONDS, 6),
-      RankInfo(Ordinal.SEVEN, Suit.DIAMONDS, 7),
-      RankInfo(Ordinal.EIGHT, Suit.DIAMONDS, 8),
-      RankInfo(Ordinal.NINE, Suit.DIAMONDS, 9),
-      RankInfo(Ordinal.TEN, Suit.DIAMONDS, 10),
-      RankInfo(Ordinal.JACK, Suit.DIAMONDS, 11),
-      RankInfo(Ordinal.QUEEN, Suit.DIAMONDS, 12),
-      RankInfo(Ordinal.KING, Suit.DIAMONDS, 13),
+      RankInfo(C.$AD, 1),
+      RankInfo(C.$2D, 2),
+      RankInfo(C.$3D, 3),
+      RankInfo(C.$4D, 4),
+      RankInfo(C.$5D, 5),
+      RankInfo(C.$6D, 6),
+      RankInfo(C.$7D, 7),
+      RankInfo(C.$8D, 8),
+      RankInfo(C.$9D, 9),
+      RankInfo(C.$10D, 10),
+      RankInfo(C.$JD, 11),
+      RankInfo(C.$QD, 12),
+      RankInfo(C.$KD, 13),
     ];
     setCards(cards1);
 
     // off-suit HEARTS
     const cards2 = [
-      RankInfo(Ordinal.TWO, Suit.HEARTS, 2),
-      RankInfo(Ordinal.THREE, Suit.HEARTS, 3),
-      RankInfo(Ordinal.FOUR, Suit.HEARTS, 4),
-      RankInfo(Ordinal.FIVE, Suit.HEARTS, 5),
-      RankInfo(Ordinal.SIX, Suit.HEARTS, 6),
-      RankInfo(Ordinal.SEVEN, Suit.HEARTS, 7),
-      RankInfo(Ordinal.EIGHT, Suit.HEARTS, 8),
-      RankInfo(Ordinal.NINE, Suit.HEARTS, 9),
-      RankInfo(Ordinal.TEN, Suit.HEARTS, 10),
-      RankInfo(Ordinal.JACK, Suit.HEARTS, 11),
-      RankInfo(Ordinal.QUEEN, Suit.HEARTS, 12),
-      RankInfo(Ordinal.KING, Suit.HEARTS, 13),
+      RankInfo(C.$AH, 1),
+      RankInfo(C.$2H, 2),
+      RankInfo(C.$3H, 3),
+      RankInfo(C.$4H, 4),
+      RankInfo(C.$5H, 5),
+      RankInfo(C.$6H, 6),
+      RankInfo(C.$7H, 7),
+      RankInfo(C.$8H, 8),
+      RankInfo(C.$9H, 9),
+      RankInfo(C.$10H, 10),
+      RankInfo(C.$JH, 11),
+      RankInfo(C.$QH, 12),
+      RankInfo(C.$KH, 13),
     ];
     setCards(cards2);
   }
@@ -110,25 +110,24 @@ class _OffsuitRedMap extends _BaseMap {
 class _TrumpClubsMap extends _BaseMap {
   _TrumpClubsMap() {
     // trump CLUBS
-    const suit = Suit.CLUBS;
     const cards = [
-      RankInfo(Ordinal.TEN, suit, 1),
-      RankInfo(Ordinal.NINE, suit, 2),
-      RankInfo(Ordinal.EIGHT, suit, 3),
-      RankInfo(Ordinal.SEVEN, suit, 4),
-      RankInfo(Ordinal.SIX, suit, 5),
+      RankInfo(C.$10C, 1),
+      RankInfo(C.$9C, 2),
+      RankInfo(C.$8C, 3),
+      RankInfo(C.$7C, 4),
+      RankInfo(C.$6C, 5),
       // { 6 }
-      RankInfo(Ordinal.FOUR, suit, 7),
-      RankInfo(Ordinal.THREE, suit, 8),
-      RankInfo(Ordinal.TWO, suit, 9),
+      RankInfo(C.$4C, 7),
+      RankInfo(C.$3C, 8),
+      RankInfo(C.$2C, 9),
       // { 10 }
       // { 11 }
-      RankInfo(Ordinal.QUEEN, suit, 12),
-      RankInfo(Ordinal.KING, suit, 13),
-      RankInfo(Ordinal.ACE, suit, 14),
-      RankInfo(Ordinal.ACE, Suit.HEARTS, 15),
-      RankInfo(Ordinal.JACK, suit, 16),
-      RankInfo(Ordinal.FIVE, suit, 17),
+      RankInfo(C.$QC, 12),
+      RankInfo(C.$KC, 13),
+      RankInfo(C.$AC, 14),
+      RankInfo(C.$AH, 15),
+      RankInfo(C.$JC, 16),
+      RankInfo(C.$5C, 17),
     ];
     setCards(cards);
   }
@@ -137,25 +136,24 @@ class _TrumpClubsMap extends _BaseMap {
 class _TrumpSpadesMap extends _BaseMap {
   _TrumpSpadesMap() {
     // trump SPADES
-    const suit = Suit.SPADES;
     const cards = [
-      RankInfo(Ordinal.TEN, suit, 1),
-      RankInfo(Ordinal.NINE, suit, 2),
-      RankInfo(Ordinal.EIGHT, suit, 3),
-      RankInfo(Ordinal.SEVEN, suit, 4),
-      RankInfo(Ordinal.SIX, suit, 5),
+      RankInfo(C.$10S, 1),
+      RankInfo(C.$9S, 2),
+      RankInfo(C.$8S, 3),
+      RankInfo(C.$7S, 4),
+      RankInfo(C.$6S, 5),
       // { 6 }
-      RankInfo(Ordinal.FOUR, suit, 7),
-      RankInfo(Ordinal.THREE, suit, 8),
-      RankInfo(Ordinal.TWO, suit, 9),
+      RankInfo(C.$4S, 7),
+      RankInfo(C.$3S, 8),
+      RankInfo(C.$2S, 9),
       // { 10 }
       // { 11 }
-      RankInfo(Ordinal.QUEEN, suit, 12),
-      RankInfo(Ordinal.KING, suit, 13),
-      RankInfo(Ordinal.ACE, suit, 14),
-      RankInfo(Ordinal.ACE, Suit.HEARTS, 15),
-      RankInfo(Ordinal.JACK, suit, 16),
-      RankInfo(Ordinal.FIVE, suit, 17),
+      RankInfo(C.$QS, 12),
+      RankInfo(C.$KS, 13),
+      RankInfo(C.$AS, 14),
+      RankInfo(C.$AH, 15),
+      RankInfo(C.$JS, 16),
+      RankInfo(C.$5S, 17),
     ];
 
     setCards(cards);
@@ -165,24 +163,23 @@ class _TrumpSpadesMap extends _BaseMap {
 class _TrumpDiamondsMap extends _BaseMap {
   _TrumpDiamondsMap() {
     // trump DIAMONDS
-    const suit = Suit.DIAMONDS;
     const cards = [
-      RankInfo(Ordinal.TWO, suit, 2),
-      RankInfo(Ordinal.THREE, suit, 3),
-      RankInfo(Ordinal.FOUR, suit, 4),
+      RankInfo(C.$2D, 2),
+      RankInfo(C.$3D, 3),
+      RankInfo(C.$4D, 4),
       // { 5 }
-      RankInfo(Ordinal.SIX, suit, 6),
-      RankInfo(Ordinal.SEVEN, suit, 7),
-      RankInfo(Ordinal.EIGHT, suit, 8),
-      RankInfo(Ordinal.NINE, suit, 9),
-      RankInfo(Ordinal.TEN, suit, 10),
+      RankInfo(C.$6D, 6),
+      RankInfo(C.$7D, 7),
+      RankInfo(C.$8D, 8),
+      RankInfo(C.$9D, 9),
+      RankInfo(C.$10D, 10),
       // { 11 }
-      RankInfo(Ordinal.QUEEN, suit, 12),
-      RankInfo(Ordinal.KING, suit, 13),
-      RankInfo(Ordinal.ACE, suit, 14),
-      RankInfo(Ordinal.ACE, Suit.HEARTS, 15),
-      RankInfo(Ordinal.JACK, suit, 16),
-      RankInfo(Ordinal.FIVE, suit, 17),
+      RankInfo(C.$QD, 12),
+      RankInfo(C.$KD, 13),
+      RankInfo(C.$AD, 14),
+      RankInfo(C.$AH, 15),
+      RankInfo(C.$JD, 16),
+      RankInfo(C.$5D, 17),
     ];
 
     setCards(cards);
@@ -194,22 +191,22 @@ class _TrumpHeartsMap extends _BaseMap {
     // trump HEARTS
     const suit = Suit.HEARTS;
     const cards = [
-      RankInfo(Ordinal.TWO, suit, 2),
-      RankInfo(Ordinal.THREE, suit, 3),
-      RankInfo(Ordinal.FOUR, suit, 4),
+      RankInfo(C.$2H, 2),
+      RankInfo(C.$3H, 3),
+      RankInfo(C.$4H, 4),
       // { 5 }
-      RankInfo(Ordinal.SIX, suit, 6),
-      RankInfo(Ordinal.SEVEN, suit, 7),
-      RankInfo(Ordinal.EIGHT, suit, 8),
-      RankInfo(Ordinal.NINE, suit, 9),
-      RankInfo(Ordinal.TEN, suit, 10),
+      RankInfo(C.$6H, 6),
+      RankInfo(C.$7H, 7),
+      RankInfo(C.$8H, 8),
+      RankInfo(C.$9H, 9),
+      RankInfo(C.$10H, 10),
       // { 11 }
-      RankInfo(Ordinal.QUEEN, suit, 12),
-      RankInfo(Ordinal.KING, suit, 13),
+      RankInfo(C.$QH, 12),
+      RankInfo(C.$KH, 13),
       // { 14 }
-      RankInfo(Ordinal.ACE, suit, 15),
-      RankInfo(Ordinal.JACK, suit, 16),
-      RankInfo(Ordinal.FIVE, suit, 17),
+      RankInfo(C.$AH, 15),
+      RankInfo(C.$JH, 16),
+      RankInfo(C.$5H, 17),
     ];
 
     setCards(cards);

@@ -1,15 +1,16 @@
 import './deck.dart';
 import './player.dart';
 import './card.dart';
+import './cards.dart';
 import './trick.dart';
 import '../services/auditor.dart';
 
 class Table {
   List<Player> players;
   Deck deck;
-  Card topCard = Card.unknown();
+  Card topCard = C.UNKNOWN;
   List<Trick> tricks = [];
-  Card leadingCard = Card.unknown();
+  Card leadingCard = C.UNKNOWN;
   int roundNum = 0;
   List<Card> discardedCards = <Card>[];
 
