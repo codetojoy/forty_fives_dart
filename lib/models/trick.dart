@@ -14,7 +14,7 @@ class Trick {
   Suit leadingSuit = Suit.UNKNOWN;
   TrickState trickState = TrickState.UNKNOWN;
   bool hasTrumpBeenPlayed = false;
-  // Bid _winningBid;
+  Bid? winningBid;
   // int _pointValue;
   List<Bid> bids = [];
 
@@ -25,6 +25,9 @@ class Trick {
   String toString() {
     var result = 'trump: $trumpSuit\n';
     result += 'leading: $leadingSuit\n';
+    if (winningBid != null) {
+      result += 'winning bid: $winningBid\n';
+    }
     bids.forEach((bid) {
       result += 'bid: $bid\n';
     });

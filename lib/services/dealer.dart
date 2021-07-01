@@ -22,17 +22,20 @@ class Dealer {
   void playRound(Table table) {
     final trick = Trick(table.trumpSuit);
     final bids = getBids(table, trick);
-    final winningBid = determineRoundWinner(bids, trick);
+    trick.bids = bids;
+    final winningBid = determineRoundWinner(trick);
+    trick.winningBid = winningBid;
     print('round winner: $winningBid');
     table.tricks.add(trick);
     print('TODO: play round');
   }
 
-  Bid determineRoundWinner(List<Bid> bids, Trick trick) {
+  Bid determineRoundWinner(Trick trick) {
     final trumpSuit = trick.trumpSuit;
     final leadingSuit = trick.leadingSuit;
+    final bids = trick.bids;
     Ranker(trumpSuit, leadingSuit).customSortBids(bids);
-    return bids[0];
+    return bids[bids.length - 1];
   }
 
   List<Bid> getBids(Table table, Trick trick) {

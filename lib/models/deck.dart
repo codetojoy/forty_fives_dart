@@ -8,6 +8,10 @@ class Deck {
     cards = List<Card>.from(C.allCards);
   }
 
+  Deck.provided(List<Card> inCards) {
+    cards = List<Card>.from(inCards);
+  }
+
   void shuffle() {
     cards.shuffle();
   }
