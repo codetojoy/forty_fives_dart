@@ -9,6 +9,7 @@ import 'package:forty_fives_dart/models/player.dart';
 import 'package:forty_fives_dart/models/hand.dart';
 import 'package:forty_fives_dart/models/strategy.dart';
 import 'package:forty_fives_dart/services/dealer.dart';
+import 'package:forty_fives_dart/utils/constants.dart';
 
 const CLUBS = Suit.CLUBS;
 const DIAMONDS = Suit.DIAMONDS;
@@ -63,6 +64,7 @@ void main() {
         expect(table.tricks.length, 1);
         expect(table.tricks[0].bids.length, 2);
         expect(table.tricks[0].winningBid!.player.name, p1.name);
+        expect(table.tricks[0].winningBid!.player.points, Const.BASE_POINTS);
         expect(table.trumpSuit, Suit.CLUBS);
         expect(table.leadingSuit, Suit.CLUBS);
         expect(p1.cards.length, 4);

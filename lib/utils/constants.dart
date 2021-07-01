@@ -26,4 +26,6 @@ class Const {
   static const String GREEN_BACK = "assets/images/cards/Green_back.jpg";
 
   static const int UNKNOWN_CARD_ID = -99;
+
+  static const int BASE_POINTS = 5;
 }

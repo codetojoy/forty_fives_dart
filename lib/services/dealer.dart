@@ -24,10 +24,15 @@ class Dealer {
     final bids = getBids(table, trick);
     trick.bids = bids;
     final winningBid = determineRoundWinner(trick);
+    awardPoints(winningBid);
     trick.winningBid = winningBid;
     print('round winner: $winningBid');
     table.tricks.add(trick);
     print('TODO: play round');
+  }
+
+  void awardPoints(Bid bid) {
+    bid.player.points += Const.BASE_POINTS;
   }
 
   Bid determineRoundWinner(Trick trick) {

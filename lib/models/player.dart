@@ -9,6 +9,7 @@ class Player {
   late Hand _hand;
   late bool _interactive;
   late Strategy _strategy;
+  int points = 0;
 
   Player(String name, Hand hand, bool interactive, Strategy strategy) {
     this.name = name;
