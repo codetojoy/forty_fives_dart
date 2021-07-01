@@ -1,6 +1,7 @@
 
 ### next
 
+* trump played
 * award points
 
 ### list

@@ -12,9 +12,10 @@ class Config {
   }
 
   Config._() {
-    final consoleStrategy = Strategies().buildStrategy(StrategyType.console);
     final nextStrategy = Strategies().buildStrategy(StrategyType.next_card);
-    final p1 = Player('You', Hand(), true, consoleStrategy);
+    // final consoleStrategy = Strategies().buildStrategy(StrategyType.console);
+    // final p1 = Player('You', Hand(), true, consoleStrategy);
+    final p1 = Player('Bach', Hand(), false, nextStrategy);
     final p2 = Player('Mozart', Hand(), false, nextStrategy);
     final p3 = Player('Chopin', Hand(), false, nextStrategy);
     _players.add(p1);

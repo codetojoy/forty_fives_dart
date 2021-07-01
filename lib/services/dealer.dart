@@ -1,5 +1,4 @@
 import '../models/bid.dart';
-import '../models/config.dart';
 import '../models/deck.dart';
 import '../models/hand.dart';
 import '../models/table.dart';
@@ -7,6 +6,7 @@ import '../models/player.dart';
 import '../models/trick.dart';
 import '../utils/constants.dart';
 import './filter.dart';
+import './ranker.dart';
 
 class Dealer {
   void dealHands(Table table, Deck deck) {
@@ -21,33 +21,50 @@ class Dealer {
 
   void playRound(Table table) {
     final trick = Trick(table.trumpSuit);
-    var bids = getBids(table, trick);
+    final bids = getBids(table, trick);
+    final winningBid = determineRoundWinner(bids, trick);
+    print('round winner: $winningBid');
     table.tricks.add(trick);
     print('TODO: play round');
   }
 
+  Bid determineRoundWinner(List<Bid> bids, Trick trick) {
+    final trumpSuit = trick.trumpSuit;
+    final leadingSuit = trick.leadingSuit;
+    Ranker(trumpSuit, leadingSuit).customSortBids(bids);
+    return bids[0];
+  }
+
   List<Bid> getBids(Table table, Trick trick) {
-    var bids = <Bid>[];
-    var playerCount = 1;
+    final bids = <Bid>[];
+    var firstPlayer = true;
     table.players.forEach((player) {
-      if (playerCount == 1) {
+      if (firstPlayer) {
         trick.leadingSuit = table.leadingSuit;
+        firstPlayer = false;
       }
-      final filter = Filters().buildFilter(FilterType.proper);
-      final cards = player.cards;
-      final trumpSuit = trick.trumpSuit;
-      final leadingSuit = trick.leadingSuit;
-      final trumpPlayed = false;
-      final candidates =
-          filter.getCandidates(cards, trumpSuit, leadingSuit, trumpPlayed);
-      var bid = player.getBid(trick, candidates);
+      final bid = getBid(player, trick);
       if (table.leadingCard.isUnknown) {
         table.leadingCard = bid.card;
       }
       bids.add(bid);
       table.discard(bid.card);
-      playerCount++;
     });
     return bids;
+  }
+
+  Bid getBid(Player player, Trick trick) {
+    final filter = Filters().buildFilter(FilterType.proper);
+    final cards = player.cards;
+    final trumpSuit = trick.trumpSuit;
+    final leadingSuit = trick.leadingSuit;
+    final trumpPlayed = trick.hasTrumpBeenPlayed;
+    final candidates =
+        filter.getCandidates(cards, trumpSuit, leadingSuit, trumpPlayed);
+    final bid = player.getBid(trick, candidates);
+    if (bid.card.suit == trumpSuit) {
+      trick.hasTrumpBeenPlayed = true;
+    }
+    return bid;
   }
 }

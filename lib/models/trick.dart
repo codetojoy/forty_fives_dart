@@ -8,11 +8,12 @@ enum TrickState {
   TRUMP_PLAYED, // = 3,
 }
 
+// TODO: maybe TrickState goes away?
 class Trick {
   Suit trumpSuit = Suit.UNKNOWN;
   Suit leadingSuit = Suit.UNKNOWN;
   TrickState trickState = TrickState.UNKNOWN;
-  // bool _hasTrumpBeenPlayed;
+  bool hasTrumpBeenPlayed = false;
   // Bid _winningBid;
   // int _pointValue;
   List<Bid> bids = [];

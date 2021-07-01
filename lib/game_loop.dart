@@ -8,6 +8,7 @@ class GameLoop {
 
     while (!done) {
       stdout.writeln('N - new game');
+      stdout.writeln('M - many games (for testing)');
       stdout.writeln('Q - quit');
       stdout.writeln('your choice: ');
       final input = stdin.readLineSync();
@@ -15,6 +16,12 @@ class GameLoop {
       final upperInput = input!.toUpperCase();
       if (upperInput == 'N') {
         Game().play();
+      } else if (upperInput == 'M') {
+        final game = Game();
+        final numGames = 200;
+        for (var i = 0; i <= numGames; i++) {
+          game.play();
+        }
       } else if (upperInput == 'Q') {
         done = true;
       }
