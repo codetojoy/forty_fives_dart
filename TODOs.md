@@ -1,10 +1,10 @@
 
 ### next
 
+* award points
 
 ### list
 
-* award points
 * reneg option
 * ace / topCard option 
 * ranker
@@ -13,6 +13,7 @@
 
 ### done
 
+* remove mapper and use simpler card/deck
 * give up on validators and go with "candidates"
 * leading suit
 * Card should be const
