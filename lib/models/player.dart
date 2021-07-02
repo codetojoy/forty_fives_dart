@@ -46,6 +46,6 @@ class Player {
 
   @override
   String toString() {
-    return '$name $_hand';
+    return '$name ($points) $_hand';
   }
 }

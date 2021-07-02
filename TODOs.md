@@ -1,11 +1,14 @@
 
 ### next
 
-* trump played
-* award points
+* more tests
 
 ### list
 
+* i think leading suit has to be cleared?
+* trump played
+* determine game winner
+* bonus points 
 * reneg option
 * ace / topCard option 
 * ranker
@@ -14,6 +17,7 @@
 
 ### done
 
+* award points
 * remove mapper and use simpler card/deck
 * give up on validators and go with "candidates"
 * leading suit

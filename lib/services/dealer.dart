@@ -26,9 +26,8 @@ class Dealer {
     final winningBid = determineRoundWinner(trick);
     awardPoints(winningBid);
     trick.winningBid = winningBid;
-    print('round winner: $winningBid');
+    print('ROUND WINNER: $winningBid');
     table.tricks.add(trick);
-    print('TODO: play round');
   }
 
   void awardPoints(Bid bid) {
