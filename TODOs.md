@@ -12,8 +12,8 @@
 * reneg option
 * ace / topCard option 
 * ranker
+    - from learn trump 
 * interfaces so models don't see services ?
-* maybe we don't need mapper at all ?
 
 ### done
 

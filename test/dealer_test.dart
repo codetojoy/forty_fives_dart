@@ -20,20 +20,45 @@ const tsUNKNOWN = TrickState.UNKNOWN;
 const tsLEADING_NO_TRUMP = TrickState.LEADING_NO_TRUMP;
 const tsTRUMP_PLAYED = TrickState.TRUMP_PLAYED;
 
-// p1 leads best trump
+// p1 leads winning trump
 final pc1a = [C.$AC, C.$2C, C.$3C, C.$4C, C.$6C];
 final pc2a = [C.$7C, C.$2H, C.$3H, C.$4H, C.$5H];
 final pc3a = [C.$9S, C.$2D, C.$3D, C.$4D, C.$5D];
 final ta = C.$10C;
+final wa = 0;
+final eta = CLUBS;
+final ela = CLUBS;
+
+// p1 leads non-trump, p2 low trump, p3 winning trump
+final pc1b = [C.$AD, C.$2D, C.$3D, C.$4D, C.$6D];
+final pc2b = [C.$7C, C.$2S, C.$3C, C.$4C, C.$5H];
+final pc3b = [C.$AC, C.$2H, C.$3H, C.$4H, C.$8H];
+final tb = C.$10C;
+final wb = 2;
+final etb = CLUBS;
+final elb = DIAMONDS;
 
 final valueMap = [
-  // n, p1 cards, p2 cards, topCard
+  // n, p1 cards, p2 cards, topCard, winner index, e-trump, e-leading
   {
     'n': 1,
     'pc1': pc1a,
     'pc2': pc2a,
     'pc3': pc3a,
     't': ta,
+    'w': wa,
+    'et': eta,
+    'el': ela,
+  },
+  {
+    'n': 2,
+    'pc1': pc1b,
+    'pc2': pc2b,
+    'pc3': pc3b,
+    't': tb,
+    'w': wb,
+    'et': etb,
+    'el': elb,
   },
 ];
 
@@ -46,6 +71,12 @@ void main() {
 
     void expectPlayerNumCards(List<Player> players, int numCards) {
       players.forEach((p) => expect(p.cards.length, numCards));
+    }
+
+    void expectUniqueCards(List<Card> cards) {
+      final numCards = cards.length;
+      final numUnique = cards.toSet().length;
+      expect(numUnique, numCards);
     }
 
     setUp(() {
@@ -64,6 +95,7 @@ void main() {
         cards.addAll(pc1);
         cards.addAll(pc2);
         cards.addAll(pc3);
+        expectUniqueCards(cards);
         // not shuffled
         final deck = Deck.provided(cards);
         final table = Table(players, deck);
@@ -77,13 +109,19 @@ void main() {
         // test
         dealer.playRound(table);
 
+        final winnerIndex = values['w'] as int;
+        final expectedWinner = players[winnerIndex];
+        final actualWinner = table.tricks[0].winningBid!.player;
         expect(table.tricks.length, 1);
         expect(table.tricks[0].bids.length, players.length);
-        expect(table.tricks[0].winningBid!.player.name, p1.name);
-        expect(table.tricks[0].winningBid!.player.points, Const.BASE_POINTS);
-        expect(table.trumpSuit, Suit.CLUBS);
-        expect(table.leadingSuit, Suit.CLUBS);
+        expect(actualWinner.name, expectedWinner.name);
+        expect(actualWinner.points, Const.BASE_POINTS);
         expectPlayerNumCards(players, 4);
+
+        final expectedTrumpSuit = values['et'] as Suit;
+        final expectedLeadingSuit = values['el'] as Suit;
+        expect(table.trumpSuit, expectedTrumpSuit);
+        expect(table.leadingSuit, expectedLeadingSuit);
       });
     }); // valueMap
   }); // group
