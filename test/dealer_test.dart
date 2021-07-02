@@ -38,10 +38,20 @@ final wb = 2;
 final etb = CLUBS;
 final elb = DIAMONDS;
 
+// p1 leads non-trump, p2 higher non-trump, p3 low non-trump
+final pc1c = [C.$JD, C.$2D, C.$3D, C.$7D, C.$6D];
+final pc2c = [C.$KD, C.$2S, C.$3S, C.$4S, C.$5S];
+final pc3c = [C.$4D, C.$2H, C.$3H, C.$4H, C.$8H];
+final tc = C.$10C;
+final wc = 1;
+final etc = CLUBS;
+final elc = DIAMONDS;
+
+var i = 1;
 final valueMap = [
   // n, p1 cards, p2 cards, topCard, winner index, e-trump, e-leading
   {
-    'n': 1,
+    'n': i++,
     'pc1': pc1a,
     'pc2': pc2a,
     'pc3': pc3a,
@@ -51,7 +61,7 @@ final valueMap = [
     'el': ela,
   },
   {
-    'n': 2,
+    'n': i++,
     'pc1': pc1b,
     'pc2': pc2b,
     'pc3': pc3b,
@@ -60,10 +70,21 @@ final valueMap = [
     'et': etb,
     'el': elb,
   },
+  {
+    'n': i++,
+    'pc1': pc1c,
+    'pc2': pc2c,
+    'pc3': pc3c,
+    't': tc,
+    'w': wc,
+    'et': etc,
+    'el': elc,
+  },
 ];
 
 void main() {
   // this is an absurd mega-test, but it seems to be working
+  // it is more of an integration test
   group('Dealer playRound', () {
     var players = <Player>[];
     var cards = <Card>[];
