@@ -231,14 +231,6 @@ class Ranker {
 
   Ranker(this._trumpSuit, this._leadingSuit);
 
-  int compare(int a, int b) {
-    return a == b
-        ? 0
-        : a > b
-            ? 1
-            : -1;
-  }
-
   void customSortArray(List<Card> cards) {
     cards.sort((a, b) => customSort(a, b));
   }
@@ -272,6 +264,20 @@ class Ranker {
     return value;
   }
 
+  int getValue(int value, Card card) {
+    var result = value;
+    final isTrump = card.isTrump(_trumpSuit);
+    final isLeadingSuit = card.isLeadingSuit(_leadingSuit);
+
+    if (isTrump) {
+      result += trumpSuitFactor;
+    } else if (isLeadingSuit) {
+      result += leadingSuitFactor;
+    }
+
+    return result;
+  }
+
   int customSort(Card cardA, Card cardB) {
     var valueA = getValueFromId(cardA);
     var valueB = getValueFromId(cardB);
@@ -280,26 +286,21 @@ class Ranker {
       throw Exception('internal error ${cardA} ${cardB}');
     }
 
-    final isCardATrump = cardA.isTrump(_trumpSuit);
-    final isCardBTrump = cardB.isTrump(_trumpSuit);
+    valueA = getValue(valueA, cardA);
+    valueB = getValue(valueB, cardB);
 
-    final isCardALeadingSuit = cardA.isLeadingSuit(_leadingSuit);
-    final isCardBLeadingSuit = cardB.isLeadingSuit(_leadingSuit);
+    // L.log('cA: $cardA vA: $valueA cB: $cardB vB: $valueB');
 
-    if (isCardATrump) {
-      valueA += trumpSuitFactor;
-    }
-    if (isCardBTrump) {
-      valueB += trumpSuitFactor;
-    }
-    if (isCardALeadingSuit) {
-      valueA += leadingSuitFactor;
-    }
-    if (isCardBLeadingSuit) {
-      valueB += leadingSuitFactor;
-    }
+    var result = 0;
 
-    final result = compare(valueA, valueB);
+    if (valueA == valueB) {
+      // same value, so order by suit
+      final suitIndexA = cardA.suit.index;
+      final suitIndexB = cardB.suit.index;
+      result = suitIndexB.compareTo(suitIndexA);
+    } else {
+      result = valueA.compareTo(valueB);
+    }
 
     return result;
   }
