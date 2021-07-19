@@ -1,6 +1,9 @@
 
 ### next
 
+* BDD for:
+    - candidates
+    - playing a trick
 * more tests
 
 ### list

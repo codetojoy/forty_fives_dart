@@ -5,17 +5,17 @@ import '../utils.dart';
 
 // No HTTP dependencies here... just business logic
 
-class Adapter {
+class RankAdapter {
   final _parser = Parser();
 
   // returns JSON: { 'cards': 'AH,2C,3D,5S' }
   String rank(String trumpStr, String leadingStr, String cardsStr) {
-    var trump = _parser.parseSuit(trumpStr);
+    final trump = _parser.parseSuit(trumpStr);
     if (trump == Suit.UNKNOWN) {
       throw Exception("unknown trump suit");
     }
-    var leading = _parser.parseSuit(leadingStr);
-    var cards = _parser.parseCards(cardsStr);
+    final leading = _parser.parseSuit(leadingStr);
+    final cards = _parser.parseCards(cardsStr);
     final ranker = Ranker(trump, leading);
     ranker.customSortArray(cards);
     final result = _buildCardsString(cards.reversed.toList());

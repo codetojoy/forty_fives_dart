@@ -8,6 +8,7 @@ class Keys {
   static const String CARDS = 'cards';
   static const String LEADING = 'leading';
   static const String TRUMP = 'trump';
+  static const String TRUMP_PLAYED = 'trumpPlayed';
 
   static const String COMMA = ',';
 }
